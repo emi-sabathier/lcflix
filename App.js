@@ -26,11 +26,16 @@ const fontConfig = {
     fontWeight: 'normal',
   },
 };
-let theme: { mode?: Mode; fonts: Fonts; dark: boolean; roundness: number; colors: { onSurface: string; notification: string; surface: string; backdrop: string; background: string; disabled: string; text: string; placeholder: string; error: string; accent: string; primary: string }; animation: { scale: number } };
-theme = {
+
+const theme = {
   ...DefaultTheme,
+  myOwnProperty: true,
+  fonts: {
+    fontFamily: 'merriweather-regular',
+    fontWeight: 'normal',
+  },
   roundness: 2,
-  fonts: configureFonts(fontConfig),
+  // fonts: configureFonts(fontConfig),
   colors: {
     ...DefaultTheme.colors,
     primary: '#3498db',
@@ -41,7 +46,7 @@ theme = {
 const App = () => {
 
   return (
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <BottomBarStack/>
       </PaperProvider>
   );
