@@ -1,112 +1,49 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- *
  * @format
- * @flow strict-local
  */
 
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {DefaultTheme, configureFonts, Provider as PaperProvider} from 'react-native-paper';
+import BottomBarStack from "./navigation/BottomBarStack";
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+const fontConfig = {
+  regular: {
+    fontFamily: 'merriweather-regular',
+    fontWeight: 'normal',
+  },
+  bold: {
+    fontFamily: 'merriweather-bold',
+    fontWeight: 'normal',
+  },
+  light: {
+    fontFamily: 'merriweather-light',
+    fontWeight: 'normal',
+  },
+  italic: {
+    fontFamily: 'merriweather-italic',
+    fontWeight: 'normal',
+  },
+};
+let theme: { mode?: Mode; fonts: Fonts; dark: boolean; roundness: number; colors: { onSurface: string; notification: string; surface: string; backdrop: string; background: string; disabled: string; text: string; placeholder: string; error: string; accent: string; primary: string }; animation: { scale: number } };
+theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  fonts: configureFonts(fontConfig),
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#3498db',
+    accent: '#f1c40f',
+  },
 };
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const App = () => {
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <PaperProvider>
+        <BottomBarStack/>
+      </PaperProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
 export default App;
