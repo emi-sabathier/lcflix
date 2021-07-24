@@ -8,27 +8,10 @@ import React from 'react';
 import {DefaultTheme, configureFonts, Provider as PaperProvider} from 'react-native-paper';
 import BottomBarStack from "./navigation/BottomBarStack";
 
-const fontConfig = {
-  regular: {
-    fontFamily: 'merriweather-regular',
-    fontWeight: 'normal',
-  },
-  bold: {
-    fontFamily: 'merriweather-bold',
-    fontWeight: 'normal',
-  },
-  light: {
-    fontFamily: 'merriweather-light',
-    fontWeight: 'normal',
-  },
-  italic: {
-    fontFamily: 'merriweather-italic',
-    fontWeight: 'normal',
-  },
-};
-
 const theme = {
-  ...DefaultTheme,
+  background: {
+    darkGrey: '#222'
+  },
   myOwnProperty: true,
   fonts: {
     fontFamily: 'merriweather-regular',

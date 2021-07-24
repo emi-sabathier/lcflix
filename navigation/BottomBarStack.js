@@ -1,20 +1,19 @@
 import React from 'react';
-import {Text, View} from 'react-native'
+import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { withTheme } from 'react-native-paper';
 import HomeStack from './HomeStack';
-import WishStack from "./WishStack";
+import WishStack from './WishStack';
 import tailwind from 'tailwind-rn';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {withTheme} from 'react-native-paper';
+import {fonts} from '../assets/fonts-style';
 
 const Tab = createBottomTabNavigator();
-const jpp = {
-    fontFamily: 'merriweather-bold'
-};
+
 function BottomBarStack(props) {
-    const {fonts} = props.theme;
-    console.log('fonts',props.theme.fonts.fontFamily)
+    const {darkGrey} = props.theme.background
+    console.log('props', darkGrey)
     return (
         <NavigationContainer>
             <Tab.Navigator initialRouteName="Home"
@@ -22,8 +21,8 @@ function BottomBarStack(props) {
                            tabBarOptions={{
                                activeTintColor: '#fff',
                                style: {
-                                   backgroundColor: '#0E0E0E'
-                               }
+                                   backgroundColor: darkGrey,
+                               },
                            }}>
                 <Tab.Screen
                     name="Home"
@@ -32,20 +31,19 @@ function BottomBarStack(props) {
                         tabBarLabel: () => null,
                         tabBarIcon: () => (
                             <View
-                                style={[{backgroundColor: 'blue'},tailwind('justify-center items-end flex-1 w-full')]}
+                                style={tailwind('justify-center items-end flex-auto w-full')}
                                 // style={{
                                 //     position: 'absolute',
                                 //     bottom: 0,
                                 //     height: 68,
                                 //     width: 68,
-                                //     borderRadius: 68,
                                 //     justifyContent: 'center',
                                 //     alignItems: 'center',
                                 // }}
                             >
-                            <Text  style={{color: '#fff', fontFamily:jpp.fontFamily}}>LcFlix!</Text>
+                                <Text style={{color: '#fff', fontSize: 30, fontFamily: fonts.bold}}>LcFlix!</Text>
                             </View>
-                        )
+                        ),
                     }}
                 />
                 <Tab.Screen
@@ -53,7 +51,9 @@ function BottomBarStack(props) {
                     component={WishStack}
                     options={{
                         tabBarIcon: () => (
-                            <Icon name="heart-outline" color="grey" size={28}/>
+                            <View>
+                                <Icon name="heart-outline" color="grey" size={28}/>
+                            </View>
                         ),
                         tabBarBadge: '4',
                         tabBarLabel: 'WishList',
