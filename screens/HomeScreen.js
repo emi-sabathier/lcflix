@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Dimensions, TouchableOpacity, ActivityIndicator, Text, View, ImageBackground} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {withTheme} from 'react-native-paper';
+import {Card, withTheme} from 'react-native-paper';
 import {fonts} from '../assets/fonts-style';
 import axios from 'axios';
 import tailwind from 'tailwind-rn';
@@ -17,28 +17,6 @@ function HomeScreen(props) {
 
     const navigation = useNavigation();
     const ref = useRef(null);
-
-    const onPressCarousel = () => {
-        navigation.navigate('MovieDetails');
-    };
-
-    const renderItem = ({item}) => (
-        <TouchableOpacity onPress={() => onPressCarousel()}>
-            <View
-                style={{
-                    backgroundColor: 'floralwhite',
-                    borderRadius: 5,
-                    height: 250,
-                    padding: 50,
-                    marginLeft: 25,
-                    marginRight: 25,
-                }}
-            >
-                <Text style={{fontSize: 30}}>{item.title}</Text>
-                <Text>{item.text}</Text>
-            </View>
-        </TouchableOpacity>
-    );
 
     useEffect(async () => {
         await axios.get('https://api.themoviedb.org/3/movie/10699?api_key=318dc2bc4628a09c26291d2dbd0ca6b2')
@@ -56,21 +34,51 @@ function HomeScreen(props) {
                 setMoviesList(lastFiveMovies);
             });
     }, []);
+
+    const onPressCarousel = () => {
+        navigation.navigate('MovieDetails');
+    };
+
+    const renderItem = ({item}) => (
+        <TouchableOpacity onPress={() => onPressCarousel()}>
+            <View style={tailwind('self-center h-5/6 w-5/6 mt-3 bg-white')}>
+                <View style={tailwind('flex-1')}>
+                    <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
+                                     resizeMode="cover" style={tailwind('w-full flex-1 justify-end')}>
+                    </ImageBackground>
+                </View>
+                <View style={tailwind('flex-row bg-white rounded-b-lg pl-3')}>
+                    <Text style={[{
+                        color: title,
+                        fontFamily: fonts.bold,
+                    }, tailwind('flex-1 text-sm leading-10 text-left')]}>{item.original_title}
+                    </Text>
+                    <View style={tailwind('pr-3 items-end self-center')}>
+                        <WishListButton/>
+                    </View>
+                </View>
+                {/*<Card>*/}
+                {/*    <Text>jpp</Text>*/}
+                {/*    <Card.Cover source={{ uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}` }} />*/}
+                {/*</Card>*/}
+                {/*<Text style={tailwind('text-2xl')}>{item.title}</Text>*/}
+            </View>
+        </TouchableOpacity>
+    );
+
     const {primary, title} = props.theme.colors;
     const {activeDot, inactiveDot} = props.theme.slider;
-    console.log(activeDot);
-    console.log(inactiveDot);
     return (
         <>
             <View style={tailwind('flex-1')}>
                 {!isLoading ?
                     <>
                         <View style={tailwind('flex-1')}>
-                            <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${heroMovie.poster_path}`}}
+                            <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${heroMovie.backdrop_path}`}}
                                              resizeMode="cover" style={tailwind('flex-1 justify-end')}>
                             </ImageBackground>
                         </View>
-                        <View style={tailwind('flex-row bg-white rounded-b-lg px-3')}>
+                        <View style={tailwind('flex-row bg-white rounded-b-lg pl-3')}>
                             <Text style={[{
                                 color: title,
                                 fontFamily: fonts.bold,
@@ -81,6 +89,8 @@ function HomeScreen(props) {
                             </View>
                         </View>
                         <View style={tailwind('flex-1')}>
+                            <Text style={[{color: primary}, tailwind('px-3 pt-1 text-center text-lg')]}>Les plus
+                                populaires</Text>
                             <Carousel
                                 ref={ref}
                                 data={moviesList}
@@ -91,31 +101,15 @@ function HomeScreen(props) {
                                 itemWidth={screenWidth}
                             />
                             <Pagination
-                                dotsLength={moviesList.length} // also based on number of sildes you want
+                                dotsLength={moviesList.length}
                                 activeDotIndex={activeSlide}
-                                containerStyle={{paddingVertical: 8}}
+                                containerStyle={{marginTop: 10, paddingVertical: 8}}
                                 dotStyle={activeDot}
                                 inactiveDotStyle={inactiveDot}
                                 inactiveDotOpacity={0.4}
                                 inactiveDotScale={0.6}
                             />
-                            {/*<Carousel*/}
-                            {/*    layout="default"*/}
-                            {/*    ref={ref}*/}
-                            {/*    data={moviesList}*/}
-                            {/*    sliderWidth={300}*/}
-                            {/*    itemWidth={300}*/}
-                            {/*    renderItem={renderItem}*/}
-                            {/*    onSnapToItem={(index) => setActiveIndex(index)}*/}
-                            {/*/>*/}
-
                         </View>
-                        {/*<View style={tailwind('flex-1')}>*/}
-                        {/*    <Text style={[{*/}
-                        {/*        color: primary,*/}
-                        {/*        fontFamily: fonts.bold,*/}
-                        {/*    }, tailwind('text-2xl text-center')]}>{heroMovie.original_title}</Text>*/}
-                        {/*</View>*/}
                     </> :
                     <View style={tailwind('flex-1 justify-center')}>
                         <ActivityIndicator size="large" color="#11CB46"/>
