@@ -5,24 +5,19 @@
  */
 
 import React from 'react';
-import {DefaultTheme, configureFonts, Provider as PaperProvider} from 'react-native-paper';
+import {Provider as PaperProvider} from 'react-native-paper';
 import BottomBarStack from "./navigation/BottomBarStack";
 
 const theme = {
   background: {
-    darkGrey: '#222'
+    darkGrey: '#222',
+    black:'#000'
   },
   myOwnProperty: true,
-  fonts: {
-    fontFamily: 'merriweather-regular',
-    fontWeight: 'normal',
-  },
   roundness: 2,
-  // fonts: configureFonts(fontConfig),
   colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
+    primary: '#fff',
+    title: '#000'
   },
 };
 

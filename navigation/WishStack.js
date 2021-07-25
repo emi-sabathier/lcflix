@@ -6,7 +6,9 @@ const Stack = createStackNavigator();
 
 export default function WishStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+            cardStyle: {backgroundColor: '#000'},
+        }}>
             <Stack.Screen name="WishList" component={WishScreen}/>
         </Stack.Navigator>
     );

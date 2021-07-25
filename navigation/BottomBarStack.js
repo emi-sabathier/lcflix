@@ -13,11 +13,13 @@ const Tab = createBottomTabNavigator();
 
 function BottomBarStack(props) {
     const {darkGrey} = props.theme.background
-    console.log('props', darkGrey)
     return (
         <NavigationContainer>
             <Tab.Navigator initialRouteName="Home"
                            style={tailwind('flex-1')}
+                           screenOptions={{
+                               cardStyle: { backgroundColor: '#000' }
+                           }}
                            tabBarOptions={{
                                activeTintColor: '#fff',
                                style: {

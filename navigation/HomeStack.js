@@ -6,7 +6,11 @@ const Stack = createStackNavigator();
 
 export default function HomeStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                cardStyle: {backgroundColor: '#000'},
+                headerShown: false
+            }}>
             <Stack.Screen name="Home" component={HomeScreen}/>
         </Stack.Navigator>
     );
