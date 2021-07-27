@@ -42,6 +42,7 @@ function HomeScreen(props) {
     const renderItem = ({item}) => (
         <TouchableOpacity onPress={() => onPressCarousel()}>
             <View style={tailwind('self-center h-5/6 w-5/6 mt-3 bg-white')}>
+                <View style={{backgroundColor: '#11CB46', height: 2}} />
                 <View style={tailwind('flex-1')}>
                     <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
                                      resizeMode="cover" style={tailwind('w-full flex-1 justify-end')}>
@@ -58,7 +59,7 @@ function HomeScreen(props) {
                     </View>
                 </View>
                 {/*<Card>*/}
-                {/*    <Text>jpp</Text>*/}
+                {/*    <Text>test</Text>*/}
                 {/*    <Card.Cover source={{ uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}` }} />*/}
                 {/*</Card>*/}
                 {/*<Text style={tailwind('text-2xl')}>{item.title}</Text>*/}
@@ -73,24 +74,28 @@ function HomeScreen(props) {
             <View style={tailwind('flex-1')}>
                 {!isLoading ?
                     <>
+                        <View style={{backgroundColor: '#11CB46', height: 2}} />
                         <View style={tailwind('flex-1')}>
                             <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${heroMovie.backdrop_path}`}}
                                              resizeMode="cover" style={tailwind('flex-1 justify-end')}>
+                                <Text style={[{
+                                    color: primary,
+                                    fontFamily: fonts.bold,
+                                    backgroundColor: "#000000c0"
+                                }, tailwind('w-full absolute bottom-0 flex-1 text-3xl leading-10 text-center')]}>{heroMovie.original_title}
+                                </Text>
+                                <View style={tailwind('flex-row rounded-b-lg pl-3')}>
+                                    <View style={tailwind('flex-1 mb-1 items-end self-center')}>
+                                        <WishListButton/>
+                                    </View>
+                                </View>
                             </ImageBackground>
                         </View>
-                        <View style={tailwind('flex-row bg-white rounded-b-lg pl-3')}>
-                            <Text style={[{
-                                color: title,
-                                fontFamily: fonts.bold,
-                            }, tailwind('flex-1 text-2xl leading-10 text-left')]}>{heroMovie.original_title}
-                            </Text>
-                            <View style={tailwind('flex-1 items-end self-center')}>
-                                <WishListButton/>
-                            </View>
-                        </View>
+
                         <View style={tailwind('flex-1')}>
-                            <Text style={[{color: primary}, tailwind('px-3 pt-1 text-center text-lg')]}>Les plus
+                            <Text style={[{color: primary, fontFamily: fonts.bold}, tailwind('px-3 pt-2 text-left text-lg')]}>Les plus
                                 populaires</Text>
+                            <Text style={[{fontFamily: fonts.light, color: primary},tailwind('px-3 opacity-60')]}>Les films les plus populaires du moment</Text>
                             <Carousel
                                 ref={ref}
                                 data={moviesList}

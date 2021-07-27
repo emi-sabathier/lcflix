@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function WishListButton() {
     return(
         <View>
-            <Icon name="heart-outline" color="grey" size={28}/>
+            <Icon name="heart-outline" color="#11CB46" size={28}/>
         </View>
     )
 }
