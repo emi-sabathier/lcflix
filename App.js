@@ -17,20 +17,9 @@ const theme = {
   roundness: 2,
   colors: {
     primary: '#fff',
-    title: '#000'
+    title: '#000',
+    flashyGreen: '#11CB46'
   },
-  slider: {
-    activeDot: {
-      width: 10,
-      height: 10,
-      borderRadius: 5,
-      marginHorizontal: 8,
-      backgroundColor: "#11CB46"
-    },
-    inactiveDot: {
-      backgroundColor: "#fff"
-    }
-  }
 };
 
 const App = () => {
