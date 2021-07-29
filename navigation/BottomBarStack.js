@@ -6,7 +6,7 @@ import { withTheme } from 'react-native-paper';
 import HomeStack from './HomeStack';
 import WishStack from './WishStack';
 import tailwind from 'tailwind-rn';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {fonts} from '../assets/fonts-style';
 
 const Tab = createBottomTabNavigator();
@@ -32,17 +32,7 @@ function BottomBarStack(props) {
                     options={{
                         tabBarLabel: () => null,
                         tabBarIcon: () => (
-                            <View
-                                style={tailwind('justify-center items-end flex-auto w-full')}
-                                // style={{
-                                //     position: 'absolute',
-                                //     bottom: 0,
-                                //     height: 68,
-                                //     width: 68,
-                                //     justifyContent: 'center',
-                                //     alignItems: 'center',
-                                // }}
-                            >
+                            <View style={tailwind('justify-center items-end flex-auto w-full')}>
                                 <Text style={{color: '#fff', fontSize: 30, fontFamily: fonts.bold}}>LcFlix!</Text>
                             </View>
                         ),
@@ -54,7 +44,7 @@ function BottomBarStack(props) {
                     options={{
                         tabBarIcon: () => (
                             <View>
-                                <Icon name="heart-outline" color="grey" size={28}/>
+                                <Icon name="favorite" color="#11CB46" size={28}/>
                             </View>
                         ),
                         tabBarBadge: '4',

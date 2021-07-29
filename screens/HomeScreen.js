@@ -85,7 +85,7 @@ function HomeScreen(props) {
                                     color: primary,
                                     fontFamily: fonts.bold,
                                     backgroundColor: '#000000c0',
-                                }, tailwind('w-full absolute bottom-0 flex-1 text-3xl leading-10 text-center')]}>{heroMovie.original_title}
+                                }, tailwind('w-full absolute bottom-0 flex-1 text-2xl leading-10 text-center')]}>{heroMovie.original_title}
                                 </Text>
                                 <View style={tailwind('flex-row')}>
                                     <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>

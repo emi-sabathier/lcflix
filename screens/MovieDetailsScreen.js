@@ -1,4 +1,4 @@
-import {ImageBackground, BackHandler, ScrollView, Text, View, ActivityIndicator} from 'react-native';
+import {ImageBackground, Image, BackHandler, ScrollView, Text, View, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import tailwind from 'tailwind-rn';
 import {withTheme} from 'react-native-paper';
@@ -30,19 +30,18 @@ function MovieDetailsScreen(props) {
         <>
             {!isLoading ?
                 <>
+                    <ScrollView>
                     <View style={tailwind('flex-1')}>
-                        <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
-                                         resizeMode="cover"
-                                         style={tailwind('flex-1 justify-end')}>
+                        <Image style={{resizeMode:'contain', width: '100%', height:200}}
+                            source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}} />
                             <Text style={[{
                                 color: primary,
                                 fontFamily: fonts.bold,
                                 backgroundColor: '#000000c0',
-                            }, tailwind('w-full absolute bottom-0 flex-1 text-3xl leading-10 text-center')]}>{item.title}
+                            }, tailwind('w-full absolute bottom-0 flex-1 text-2xl leading-10 text-center')]}>{item.title}
                             </Text>
-                        </ImageBackground>
                     </View>
-                    <ScrollView style={tailwind('flex-1 px-5')}>
+                    <View style={tailwind('flex-1 px-5')}>
                         <Text style={[{
                             color: primary,
                             width: 150,
@@ -57,6 +56,7 @@ function MovieDetailsScreen(props) {
                             fontFamily: fonts.bold,
                         }, tailwind('text-lg pt-2 border-b-2')]}>Synopsis</Text>
                         <Text style={[{color: primary}, tailwind('pt-2')]}>{item.overview}</Text>
+                    </View>
                     </ScrollView></> :
                 <View style={tailwind('flex-1 justify-center')}>
                     <ActivityIndicator size="large" color={flashyGreen}/>
@@ -64,5 +64,4 @@ function MovieDetailsScreen(props) {
         </>
     );
 }
-
 export default withTheme(MovieDetailsScreen);
