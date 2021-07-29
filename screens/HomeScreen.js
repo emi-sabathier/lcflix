@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Dimensions, ActivityIndicator, Text, View, ImageBackground} from 'react-native';
+import {ActivityIndicator, Text, View, ImageBackground} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 import {withTheme} from 'react-native-paper';
 import {fonts} from '../assets/fonts-style';
-import axios from 'axios';
 import tailwind from 'tailwind-rn';
 import WishListButton from '../components/WishListButton';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 function HomeScreen(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +20,7 @@ function HomeScreen(props) {
 
     useEffect(async () => {
         await axios.get('https://api.themoviedb.org/3/movie/10699?api_key=318dc2bc4628a09c26291d2dbd0ca6b2')
-            .then((res) => {
+            .then(res => {
                 setIsLoading(false);
                 setHeroMovie(res.data);
             })
@@ -28,20 +28,24 @@ function HomeScreen(props) {
                 console.log(err);
             });
         await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=318dc2bc4628a09c26291d2dbd0ca6b2&language=fr&page=1')
-            .then((res) => {
+            .then(res => {
                 setIsLoading(false);
                 let lastFiveMovies = res.data.results.slice(0, 5).map(movie => movie);
                 setMoviesList(lastFiveMovies);
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err);
             });
     }, []);
 
-    const onPressCarousel = () => {
-        navigation.navigate('MovieDetails');
+    const onPressCarousel = (item) => {
+        navigation.navigate('MovieDetails', {item});
     };
 
     const renderItem = useCallback(({item}) => {
         return (
-            <TouchableWithoutFeedback onPress={() => onPressCarousel()}>
+            <TouchableWithoutFeedback onPress={() => onPressCarousel(item)}>
                 <View
                     style={[{
                         height: 180,
@@ -81,7 +85,7 @@ function HomeScreen(props) {
                                     color: primary,
                                     fontFamily: fonts.bold,
                                     backgroundColor: '#000000c0',
-                                }, tailwind('w-full absolute bottom-0 flex-1 text-3xl leading-10 text-center')]}>{heroMovie.original_title}
+                                }, tailwind('w-full absolute bottom-0 flex-1 text-2xl leading-10 text-center')]}>{heroMovie.original_title}
                                 </Text>
                                 <View style={tailwind('flex-row')}>
                                     <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>
@@ -118,4 +122,5 @@ function HomeScreen(props) {
         </>
     );
 }
+
 export default withTheme(HomeScreen);
