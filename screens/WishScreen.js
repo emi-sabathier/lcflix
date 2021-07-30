@@ -17,7 +17,7 @@ function WishScreen(props) {
                         <Image style={[{height: 150}, tailwind('w-full')]}
                                source={{uri: 'https://via.placeholder.com/300x500.png?text=Image+Test'}}/>
                         <View style={tailwind('absolute bottom-0 mb-1 pb-2 pr-2 items-end self-end')}>
-                            <Icon name="trash-can" color="#11CB46" size={20}/>
+                            <Icon name="favorite" color="#11CB46" size={20}/>
                         </View>
                     </View>
                     <View style={tailwind('bg-green-300 flex-1 p-2')}>

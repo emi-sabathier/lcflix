@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {ActivityIndicator, Text, View, ImageBackground} from 'react-native';
+import {ActivityIndicator, Text, Image, View, ImageBackground, TouchableOpacity} from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
@@ -7,16 +7,39 @@ import Carousel from 'react-native-snap-carousel';
 import {withTheme} from 'react-native-paper';
 import {fonts} from '../assets/fonts-style';
 import tailwind from 'tailwind-rn';
-import WishListButton from '../components/WishListButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {addFavoriteMovie} from '../redux/actions';
 
 function HomeScreen(props) {
+    const ref = useRef(null);
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
     const [heroMovie, setHeroMovie] = useState([]);
     const [activeSlide, setActiveSlide] = useState(0);
     const [moviesList, setMoviesList] = useState([]);
     const navigation = useNavigation();
-    const ref = useRef(null);
     const {primary, title, flashyGreen} = props.theme.colors;
+    const {favoritesList} = useSelector(state => state.favoritesReducer);
+    console.log('favoritesList', favoritesList);
+    const dispatchAddFavorite = (movie) => {
+        dispatch(addFavoriteMovie(movie));
+    };
+
+    const addFavorite = (movie) => {
+        dispatchAddFavorite(movie);
+    };
+
+    const isFavoriteExist = (movie) => {
+        // console.log('is fav exist movie', movie)
+        // if (favoritesList.filter((item,i) => item.id === movie.id).length > 0) {
+        //     console.log('true')
+        //     return true;
+        // } else {
+        //     console.log('false');
+        //     return false;
+        // }
+    };
 
     useEffect(async () => {
         await axios.get('https://api.themoviedb.org/3/movie/10699?api_key=318dc2bc4628a09c26291d2dbd0ca6b2')
@@ -32,7 +55,6 @@ function HomeScreen(props) {
                 setIsLoading(false);
                 let lastFiveMovies = res.data.results.slice(0, 5).map(movie => movie);
                 setMoviesList(lastFiveMovies);
-                console.log(res)
             })
             .catch(err => {
                 console.log(err);
@@ -45,30 +67,32 @@ function HomeScreen(props) {
 
     const renderItem = useCallback(({item}) => {
         return (
-            <TouchableWithoutFeedback onPress={() => onPressCarousel(item)}>
-                <View
-                    style={[{
-                        height: 180,
-                        padding: 5,
-                    }, tailwind('bg-white mx-6 rounded-lg')]}
-                >
-                    <View style={tailwind('flex-1')}>
-                        <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
-                                         resizeMode="cover" style={tailwind('w-full flex-1 justify-end')}>
-                        </ImageBackground>
+            <View
+                style={[{
+                    height: 180,
+                    padding: 5,
+                }, tailwind('bg-white mx-6 rounded-lg')]}
+            >
+                <TouchableWithoutFeedback onPress={() => onPressCarousel(item)}>
+                    <View>
+                        <Image source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
+                               style={[{resizeMode: 'contain', width: '100%', height: 135}]}/>
                     </View>
-                    <View style={tailwind('flex-row bg-white pt-2')}>
-                        <Text style={[{
-                            color: title,
-                            fontFamily: fonts.bold,
-                        }, tailwind('flex-1 text-xs leading-5 text-left')]}>{item.original_title}
-                        </Text>
-                        <View style={tailwind('pr-3 items-end self-center')}>
-                            <WishListButton/>
-                        </View>
+                </TouchableWithoutFeedback>
+                <View style={tailwind('flex-row bg-white pt-2')}>
+                    <Text style={[{
+                        color: title,
+                        fontFamily: fonts.bold,
+                    }, tailwind('flex-1 text-xs leading-5 text-left')]}>{item.original_title}
+                    </Text>
+                    <View style={tailwind('pr-3 items-end self-center')}>
+                        <TouchableOpacity onPress={() => addFavorite(item)}>
+                            <Icon name={isFavoriteExist(favoritesList) ? 'favorite' : 'favorite-border'}
+                                  color='#11CB46' size={28}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
-            </TouchableWithoutFeedback>
+            </View>
         );
     }, []);
 
@@ -89,7 +113,11 @@ function HomeScreen(props) {
                                 </Text>
                                 <View style={tailwind('flex-row')}>
                                     <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>
-                                        <WishListButton/>
+                                        <TouchableOpacity onPress={() => addFavorite(heroMovie)}>
+                                            <Icon
+                                                name={isFavoriteExist(heroMovie) ? 'favorite' : 'favorite-border'}
+                                                color='#11CB46' size={28}/>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </ImageBackground>

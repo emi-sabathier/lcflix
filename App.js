@@ -25,7 +25,6 @@ const theme = {
 };
 
 const App = () => {
-
     return (
         <Provider store={store}>
             <PaperProvider theme={theme}>
