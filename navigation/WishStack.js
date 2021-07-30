@@ -8,6 +8,7 @@ export default function WishStack() {
     return (
         <Stack.Navigator screenOptions={{
             cardStyle: {backgroundColor: '#000'},
+            headerShown: false
         }}>
             <Stack.Screen name="WishList" component={WishScreen}/>
         </Stack.Navigator>
