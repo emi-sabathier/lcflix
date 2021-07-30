@@ -61,7 +61,7 @@ function HomeScreen(props) {
                         <Text style={[{
                             color: title,
                             fontFamily: fonts.bold,
-                        }, tailwind('flex-1 text-sm leading-5 text-left')]}>{item.original_title}
+                        }, tailwind('flex-1 text-xs leading-5 text-left')]}>{item.original_title}
                         </Text>
                         <View style={tailwind('pr-3 items-end self-center')}>
                             <WishListButton/>
