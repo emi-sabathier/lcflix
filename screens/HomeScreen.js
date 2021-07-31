@@ -9,7 +9,7 @@ import {fonts} from '../assets/fonts-style';
 import tailwind from 'tailwind-rn';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {addFavoriteMovie} from '../redux/actions';
+import {addFavoriteMovie, deleteFavoriteMovie} from '../redux/actions';
 
 function HomeScreen(props) {
     const ref = useRef(null);
@@ -21,24 +21,37 @@ function HomeScreen(props) {
     const navigation = useNavigation();
     const {primary, title, flashyGreen} = props.theme.colors;
     const {favoritesList} = useSelector(state => state.favoritesReducer);
-    console.log('favoritesList', favoritesList);
+
+    useEffect(() => {
+        console.log('useEffect', favoritesList);
+    })
     const dispatchAddFavorite = (movie) => {
+        console.log('dispatch add')
         dispatch(addFavoriteMovie(movie));
+    };
+
+    const dispatchDeleteFavorite = (movie) => {
+        console.log('dispatch delete')
+        dispatch(deleteFavoriteMovie(movie));
     };
 
     const addFavorite = (movie) => {
         dispatchAddFavorite(movie);
     };
 
+    const deleteFavorite = (movie) => {
+        dispatchDeleteFavorite(movie);
+    }
+
     const isFavoriteExist = (movie) => {
-        // console.log('is fav exist movie', movie)
-        // if (favoritesList.filter((item,i) => item.id === movie.id).length > 0) {
-        //     console.log('true')
-        //     return true;
-        // } else {
-        //     console.log('false');
-        //     return false;
-        // }
+        console.log('is fav exist movie', movie)
+        if (favoritesList.filter((item,i) => item.id === movie.id).length > 0) {
+            console.log('true')
+            return true;
+        } else {
+            console.log('false');
+            return false;
+        }
     };
 
     useEffect(async () => {
@@ -79,6 +92,7 @@ function HomeScreen(props) {
                                style={[{resizeMode: 'contain', width: '100%', height: 135}]}/>
                     </View>
                 </TouchableWithoutFeedback>
+
                 <View style={tailwind('flex-row bg-white pt-2')}>
                     <Text style={[{
                         color: title,
@@ -86,12 +100,17 @@ function HomeScreen(props) {
                     }, tailwind('flex-1 text-xs leading-5 text-left')]}>{item.original_title}
                     </Text>
                     <View style={tailwind('pr-3 items-end self-center')}>
-                        <TouchableOpacity onPress={() => addFavorite(item)}>
+                        <TouchableOpacity onPress={() => {
+                            isFavoriteExist(item)
+                                ? deleteFavorite(item)
+                                : addFavorite(item)
+                        }}>
                             <Icon name={isFavoriteExist(favoritesList) ? 'favorite' : 'favorite-border'}
                                   color='#11CB46' size={28}/>
                         </TouchableOpacity>
                     </View>
                 </View>
+
             </View>
         );
     }, []);
@@ -113,7 +132,12 @@ function HomeScreen(props) {
                                 </Text>
                                 <View style={tailwind('flex-row')}>
                                     <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>
-                                        <TouchableOpacity onPress={() => addFavorite(heroMovie)}>
+                                        <TouchableOpacity onPress={() => {
+                                            console.log('click')
+                                            isFavoriteExist(heroMovie)
+                                                ? deleteFavorite(heroMovie)
+                                                : addFavorite(heroMovie)}
+                                        }>
                                             <Icon
                                                 name={isFavoriteExist(heroMovie) ? 'favorite' : 'favorite-border'}
                                                 color='#11CB46' size={28}/>
