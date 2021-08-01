@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, Text, Image, View, ImageBackground, TouchableOpacity} from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import axios from 'axios';
@@ -7,51 +7,21 @@ import Carousel from 'react-native-snap-carousel';
 import {withTheme} from 'react-native-paper';
 import {fonts} from '../assets/fonts-style';
 import tailwind from 'tailwind-rn';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useDispatch, useSelector} from 'react-redux';
-import {addFavoriteMovie, deleteFavoriteMovie} from '../redux/actions';
 import {AlertContext} from '../context/AlertContext';
+import WishListButton from '../shared/WishListButton';
 
 function HomeScreen(props) {
     const ref = useRef(null);
-    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
     const [heroMovie, setHeroMovie] = useState([]);
     const [activeSlide, setActiveSlide] = useState(0);
     const [moviesList, setMoviesList] = useState([]);
     const navigation = useNavigation();
     const {primary, title, flashyGreen} = props.theme.colors;
-    const {favoritesList} = useSelector(state => state.favoritesReducer);
     const {dropDownAlert} = useContext(AlertContext);
 
     useEffect(() => {
     }, []);
-
-    // update redux store, add movie
-    const dispatchAddFavorite = (movie) => {
-        dispatch(addFavoriteMovie(movie));
-    };
-
-    // update redux store, delete movie
-    const dispatchDeleteFavorite = (movie) => {
-        dispatch(deleteFavoriteMovie(movie));
-    };
-
-    const addFavorite = (movie) => {
-        dispatchAddFavorite(movie);
-    };
-
-    const deleteFavorite = (movie) => {
-        dispatchDeleteFavorite(movie);
-    };
-
-    const isFavoriteExist = (movie) => {
-        if (favoritesList.filter((item) => item.id === movie.id).length > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    };
 
     useEffect(async () => {
         await axios.get('https://api.themoviedb.org/3/movie/10699?api_key=318dc2bc4628a09c26291d2dbd0ca6b2')
@@ -94,7 +64,7 @@ function HomeScreen(props) {
                     </View>
                 </TouchableWithoutFeedback>
 
-                <View style={tailwind('flex-row bg-white pt-2')}>
+                <View style={tailwind('flex-row bg-white pt-2 max-h-8')}>
                     <Text style={[{
                         lineHeight: 1,
                         color: title,
@@ -102,12 +72,7 @@ function HomeScreen(props) {
                     }, tailwind('flex-1 text-sm text-left self-start')]}>{item.original_title}
                     </Text>
                     <View style={tailwind('pr-3 items-end self-center')}>
-                        <TouchableOpacity onPress={() => {
-                            isFavoriteExist(item) ? deleteFavorite(item) : addFavorite(item);
-                        }}>
-                            <Icon name={isFavoriteExist(item) ? 'favorite' : 'favorite-border'}
-                                  color='#11CB46' size={28}/>
-                        </TouchableOpacity>
+                        <WishListButton movieItem={item} />
                     </View>
                 </View>
             </View>
@@ -134,13 +99,7 @@ function HomeScreen(props) {
                                 <View style={tailwind('flex-row')}>
                                     <View
                                         style={tailwind('flex-1 mb-1 bottom-0 right-0 absolute pr-5 items-end self-center')}>
-                                        <TouchableOpacity onPress={() => {
-                                            isFavoriteExist(heroMovie) ? deleteFavorite(heroMovie) : addFavorite(heroMovie);
-                                        }}>
-                                            <Icon
-                                                name={isFavoriteExist(heroMovie) ? 'favorite' : 'favorite-border'}
-                                                color='#11CB46' size={28}/>
-                                        </TouchableOpacity>
+                                        <WishListButton movieItem={heroMovie} />
                                     </View>
                                 </View>
                             </TouchableOpacity>
