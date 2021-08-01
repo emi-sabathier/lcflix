@@ -23,15 +23,13 @@ function HomeScreen(props) {
     const {favoritesList} = useSelector(state => state.favoritesReducer);
 
     useEffect(() => {
-        console.log('useEffect', favoritesList);
-    })
+    }, []);
+
     const dispatchAddFavorite = (movie) => {
-        console.log('dispatch add')
         dispatch(addFavoriteMovie(movie));
     };
 
     const dispatchDeleteFavorite = (movie) => {
-        console.log('dispatch delete')
         dispatch(deleteFavoriteMovie(movie));
     };
 
@@ -41,11 +39,10 @@ function HomeScreen(props) {
 
     const deleteFavorite = (movie) => {
         dispatchDeleteFavorite(movie);
-    }
+    };
 
     const isFavoriteExist = (movie) => {
-        console.log('is fav exist movie', movie)
-        if (favoritesList.filter((item,i) => item.id === movie.id).length > 0) {
+        if (favoritesList.filter((item) => item.id === movie.id).length > 0) {
             return true;
         } else {
             return false;
@@ -76,14 +73,12 @@ function HomeScreen(props) {
         navigation.navigate('MovieDetails', {item});
     };
 
-    const renderItem = useCallback(({item}) => {
+    const renderItem = ({item}) => {
         return (
-            <View
-                style={[{
-                    height: 180,
-                    padding: 5,
-                }, tailwind('bg-white mx-6 rounded-lg')]}
-            >
+            <View style={[{
+                height: 180,
+                padding: 5,
+            }, tailwind('bg-white mx-6 rounded-lg')]}>
                 <TouchableWithoutFeedback onPress={() => onPressCarousel(item)}>
                     <View>
                         <Image source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
@@ -101,17 +96,16 @@ function HomeScreen(props) {
                         <TouchableOpacity onPress={() => {
                             isFavoriteExist(item)
                                 ? deleteFavorite(item)
-                                : addFavorite(item)
+                                : addFavorite(item);
                         }}>
-                            <Icon name={isFavoriteExist(favoritesList) ? 'favorite' : 'favorite-border'}
+                            <Icon name={isFavoriteExist(item) ? 'favorite' : 'favorite-border'}
                                   color='#11CB46' size={28}/>
                         </TouchableOpacity>
                     </View>
                 </View>
-
             </View>
         );
-    }, []);
+    };
 
     return (
         <>
@@ -131,10 +125,10 @@ function HomeScreen(props) {
                                 <View style={tailwind('flex-row')}>
                                     <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>
                                         <TouchableOpacity onPress={() => {
-                                            console.log('click')
                                             isFavoriteExist(heroMovie)
                                                 ? deleteFavorite(heroMovie)
-                                                : addFavorite(heroMovie)}
+                                                : addFavorite(heroMovie);
+                                        }
                                         }>
                                             <Icon
                                                 name={isFavoriteExist(heroMovie) ? 'favorite' : 'favorite-border'}
