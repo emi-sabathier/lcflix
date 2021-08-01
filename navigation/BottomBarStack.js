@@ -44,14 +44,13 @@ function BottomBarStack(props) {
                     name="WishList"
                     component={WishStack}
                     options={{
+                        tabBarLabel: () => null,
                         tabBarIcon: () => (
                             <View>
                                 <Icon name="favorite" color="#11CB46" size={28}/>
                             </View>
                         ),
-                        tabBarBadge: Object.keys(favoritesList).length,
-                        tabBarLabel: 'WishList',
-                    }}
+                        tabBarBadge: Object.keys(favoritesList).length}}
                 />
             </Tab.Navigator>
         </NavigationContainer>
