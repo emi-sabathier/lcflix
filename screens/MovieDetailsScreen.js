@@ -1,29 +1,22 @@
 import {
-    ImageBackground,
     Image,
-    BackHandler,
     ScrollView,
     Text,
     View,
     ActivityIndicator,
-    TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import tailwind from 'tailwind-rn';
 import {withTheme} from 'react-native-paper';
 import {fonts} from '../assets/fonts-style';
 import axios from 'axios';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import {addFavoriteMovie, deleteFavoriteMovie} from '../redux/actions';
-import {useDispatch, useSelector} from 'react-redux';
+import WishListButton from '../shared/WishListButton';
 
 function MovieDetailsScreen(props) {
     const {item} = props.route.params;
-    const dispatch = useDispatch();
-    const {primary, title, flashyGreen} = props.theme.colors;
+    const {primary, flashyGreen} = props.theme.colors;
     const [isLoading, setIsLoading] = useState(true);
     const [director, setDirector] = useState([]);
-    const {favoritesList} = useSelector(state => state.favoritesReducer);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,32 +31,6 @@ function MovieDetailsScreen(props) {
         };
         fetchData();
     }, [setDirector]);
-
-    // update redux store, add movie
-    const dispatchAddFavorite = (movie) => {
-        dispatch(addFavoriteMovie(movie));
-    };
-
-    // update redux store, delete movie
-    const dispatchDeleteFavorite = (movie) => {
-        dispatch(deleteFavoriteMovie(movie));
-    };
-
-    const addFavorite = (movie) => {
-        dispatchAddFavorite(movie);
-    };
-
-    const deleteFavorite = (movie) => {
-        dispatchDeleteFavorite(movie);
-    };
-
-    const isFavoriteExist = (movie) => {
-        if (favoritesList.filter((item) => item.id === movie.id).length > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    };
 
     return (
         <>
@@ -80,13 +47,7 @@ function MovieDetailsScreen(props) {
                                 }, tailwind('w-10/12 text-2xl leading-10 ml-5 text-center')]}>{item.title}
                                 </Text>
                                 <View style={tailwind('mb-1 pr-5 items-end self-center')}>
-                                    <TouchableOpacity onPress={() => {
-                                        isFavoriteExist(item) ? deleteFavorite(item) : addFavorite(item);
-                                    }}>
-                                        <Icon
-                                            name={isFavoriteExist(item) ? 'favorite' : 'favorite-border'}
-                                            color='#11CB46' size={28}/>
-                                    </TouchableOpacity>
+                                    <WishListButton movieItem={item} />
                                 </View>
                             </View>
                         </View>
