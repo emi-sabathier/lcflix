@@ -85,7 +85,7 @@ function HomeScreen(props) {
             <View style={[{
                 height: 180,
                 padding: 5,
-            }, tailwind('bg-white mx-5 rounded-lg')]}>
+            }, tailwind('bg-white mx-7 rounded-lg')]}>
                 <TouchableWithoutFeedback onPress={() => onPressCarousel(item)}>
                     <View>
                         <Image source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
