@@ -10,9 +10,8 @@ export default function HomeStack() {
         <Stack.Navigator
             screenOptions={{
                 cardStyle: {backgroundColor: '#000'},
-                headerShown: false
             }}>
-            <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
             <Stack.Screen name="MovieDetails" component={MovieDetailsScreen}/>
         </Stack.Navigator>
     );
