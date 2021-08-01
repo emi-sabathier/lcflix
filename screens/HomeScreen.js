@@ -76,12 +76,16 @@ function HomeScreen(props) {
         navigation.navigate('MovieDetails', {item});
     };
 
+    const onPressHero = (item) => {
+        navigation.navigate('MovieDetails', {item});
+    }
+
     const renderItem = ({item}) => {
         return (
             <View style={[{
                 height: 180,
                 padding: 5,
-            }, tailwind('bg-white mx-6 rounded-lg')]}>
+            }, tailwind('bg-white mx-5 rounded-lg')]}>
                 <TouchableWithoutFeedback onPress={() => onPressCarousel(item)}>
                     <View>
                         <Image source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}
@@ -91,9 +95,10 @@ function HomeScreen(props) {
 
                 <View style={tailwind('flex-row bg-white pt-2')}>
                     <Text style={[{
+                        lineHeight: 1,
                         color: title,
                         fontFamily: fonts.bold,
-                    }, tailwind('flex-1 text-xs leading-5 text-left')]}>{item.original_title}
+                    }, tailwind('flex-1 text-sm text-left self-start')]}>{item.original_title}
                     </Text>
                     <View style={tailwind('pr-3 items-end self-center')}>
                         <TouchableOpacity onPress={() => {
@@ -115,8 +120,10 @@ function HomeScreen(props) {
                     <>
                         <View style={{height: 3, backgroundColor: flashyGreen}}/>
                         <View style={tailwind('flex-1')}>
-                            <ImageBackground source={{uri: `https://image.tmdb.org/t/p/w500${heroMovie.backdrop_path}`}}
-                                             resizeMode="cover" style={tailwind('flex-1 justify-end')}>
+                            <TouchableOpacity onPress={() =>  onPressHero(heroMovie)}>
+                                <Image
+                                    source={{uri: `https://image.tmdb.org/t/p/w500${heroMovie.backdrop_path}`}}
+                                    style={[tailwind('h-full w-full justify-end')]} />
                                 <Text style={[{
                                     color: primary,
                                     fontFamily: fonts.bold,
@@ -124,25 +131,24 @@ function HomeScreen(props) {
                                 }, tailwind('w-full absolute bottom-0 flex-1 text-2xl leading-10 text-center')]}>{heroMovie.original_title}
                                 </Text>
                                 <View style={tailwind('flex-row')}>
-                                    <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>
+                                    <View style={tailwind('flex-1 mb-1 bottom-0 right-0 absolute pr-5 items-end self-center')}>
                                         <TouchableOpacity onPress={() => {
                                             isFavoriteExist(heroMovie) ? deleteFavorite(heroMovie) : addFavorite(heroMovie);
-                                        }
-                                        }>
+                                        }}>
                                             <Icon
                                                 name={isFavoriteExist(heroMovie) ? 'favorite' : 'favorite-border'}
                                                 color='#11CB46' size={28}/>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            </ImageBackground>
+                            </TouchableOpacity>
                         </View>
 
                         <View style={tailwind('flex-1')}>
                             <Text style={[{
                                 color: primary,
                                 fontFamily: fonts.bold,
-                            }, tailwind('px-5 pt-2 text-left text-lg')]}>Le top 5</Text>
+                            }, tailwind('px-5 pt-2 text-left text-xl')]}>Le top 5</Text>
                             <Text style={[{fontFamily: fonts.light, color: primary}, tailwind('px-5 pb-3 opacity-60')]}>Les
                                 films les plus populaires</Text>
                             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>

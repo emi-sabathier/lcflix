@@ -6,56 +6,62 @@ import {fonts} from '../assets/fonts-style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteFavoriteMovie} from '../redux/actions';
+import {useNavigation} from '@react-navigation/native';
 
 function WishScreen(props) {
     const dispatch = useDispatch();
     const {favoritesList} = useSelector(state => state.favoritesReducer);
     const {primary, title, flashyGreen} = props.theme.colors;
     const [isFavoritesList, setIsFavoritesList] = useState(false);
+    const navigation = useNavigation();
 
     useEffect(() => {
         favoritesList.length > 0 ? setIsFavoritesList(true) : setIsFavoritesList(false);
-    }, [isFavoritesList,favoritesList]);
+    }, [isFavoritesList, favoritesList]);
 
     const dispatchDeleteFavorite = (movie) => {
         dispatch(deleteFavoriteMovie(movie));
     };
 
     const deleteFavorite = (movie) => {
-        console.log('delete');
         dispatchDeleteFavorite(movie);
     };
 
+    const onPressMovie = (item) => {
+        navigation.navigate('MovieDetails', {item});
+    }
+
     const renderItem = ({item}) => {
-        console.log('renderItem', item);
         return (
-            <View key={item.id} style={tailwind('mt-4 flex-row bg-white max-h-40')}>
-                <View style={tailwind('flex-1')}>
-                    <Image style={[{height: '100%', resizeMode:'cover'}, tailwind('w-full')]}
-                           source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}/>
-                    <View style={tailwind('absolute bottom-0 mb-1 pb-0 pr-2 items-end self-end')}>
-                        <TouchableOpacity onPress={() => {
-                            deleteFavorite(item);
-                        }}>
-                            <Icon name="favorite" color='#11CB46' size={28}/>
-                        </TouchableOpacity>
+            <TouchableOpacity onPress={() => onPressMovie(item)}>
+                <View key={item.id} style={tailwind('mt-4 flex-row bg-white max-h-40')}>
+                    <View style={tailwind('flex-1')}>
+                        <Image style={[{height: '100%', resizeMode: 'cover'}, tailwind('w-full')]}
+                               source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}/>
+                        <View style={tailwind('absolute bottom-0 mb-1 pb-0 pr-2 items-end self-end')}>
+                            <TouchableOpacity onPress={() => {
+                                deleteFavorite(item);
+                            }}>
+                                <Icon name="favorite" color='#11CB46' size={28}/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={tailwind('flex-1 p-2')}>
+                        <Text style={{fontFamily: fonts.bold}}>{item.original_title}</Text>
+                        <Text style={[{fontFamily: fonts.light}, tailwind('text-xs')]}>Date de
+                            sortie: {item.release_date.substring(0,4)}</Text>
+                        <View style={tailwind('flex-row')}>
+                            <Icon name="thumb-up" color="#11CB46" size={20}/>
+                            <Text style={[{fontFamily: fonts.bold}, tailwind('pl-2')]}>{item.vote_average}</Text>
+                        </View>
+                        <View>
+                            <Text style={tailwind('text-xs pt-2')}>
+                                {item.overview.slice(0, 120)} [...]
+                            </Text>
+                        </View>
                     </View>
                 </View>
-                <View style={tailwind('flex-1 p-2')}>
-                    <Text style={{fontFamily: fonts.bold}}>{item.original_title}</Text>
-                    <Text style={[{fontFamily: fonts.light}, tailwind('text-xs')]}>Date de
-                        sortie: {item.release_date}</Text>
-                    <View style={tailwind('flex-row')}>
-                        <Icon name="thumb-up" color="#11CB46" size={20}/>
-                        <Text style={[{fontFamily: fonts.bold}, tailwind('pl-2')]}>{item.vote_average}</Text>
-                    </View>
-                    <View>
-                        <Text style={tailwind('text-xs pt-2')}>
-                            {item.overview.slice(0, 120)} [...]
-                        </Text>
-                    </View>
-                </View>
-            </View>
+            </TouchableOpacity>
         );
     };
     return (

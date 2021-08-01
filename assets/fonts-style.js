@@ -1,5 +1,4 @@
 export const fonts = {
-    bold: 'merriweather-bold',
-    regular: 'merriweather-regular',
-    light: 'merriweather-light'
+    bold: 'gilroy-bold',
+    light: 'gilroy-light'
 };
