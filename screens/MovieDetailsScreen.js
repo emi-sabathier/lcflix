@@ -79,11 +79,8 @@ function MovieDetailsScreen(props) {
                                 </Text>
                                 <View style={tailwind('mb-1 pr-5 items-end self-center')}>
                                     <TouchableOpacity onPress={() => {
-                                        isFavoriteExist(item)
-                                            ? deleteFavorite(item)
-                                            : addFavorite(item);
-                                    }
-                                    }>
+                                        isFavoriteExist(item) ? deleteFavorite(item) : addFavorite(item);
+                                    }}>
                                         <Icon
                                             name={isFavoriteExist(item) ? 'favorite' : 'favorite-border'}
                                             color='#11CB46' size={28}/>

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, Text, Image, View, ImageBackground, TouchableOpacity} from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import tailwind from 'tailwind-rn';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {addFavoriteMovie, deleteFavoriteMovie} from '../redux/actions';
+import {AlertContext} from '../context/AlertContext';
 
 function HomeScreen(props) {
     const ref = useRef(null);
@@ -21,6 +22,7 @@ function HomeScreen(props) {
     const navigation = useNavigation();
     const {primary, title, flashyGreen} = props.theme.colors;
     const {favoritesList} = useSelector(state => state.favoritesReducer);
+    const {dropDownAlert} = useContext(AlertContext);
 
     useEffect(() => {
     }, []);
@@ -56,8 +58,9 @@ function HomeScreen(props) {
                 setHeroMovie(res.data);
             })
             .catch(err => {
-                console.log(err);
+                dropDownAlert.alertWithType('error', 'Erreur', 'Une erreur est survenue lors de la récupération des films');
             });
+
         await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=318dc2bc4628a09c26291d2dbd0ca6b2&language=fr&page=1')
             .then(res => {
                 setIsLoading(false);
@@ -65,7 +68,7 @@ function HomeScreen(props) {
                 setMoviesList(lastFiveMovies);
             })
             .catch(err => {
-                console.log(err);
+                dropDownAlert.alertWithType('error', 'Erreur', 'Une erreur est survenue lors de la récupération des films');
             });
     }, []);
 
@@ -94,9 +97,7 @@ function HomeScreen(props) {
                     </Text>
                     <View style={tailwind('pr-3 items-end self-center')}>
                         <TouchableOpacity onPress={() => {
-                            isFavoriteExist(item)
-                                ? deleteFavorite(item)
-                                : addFavorite(item);
+                            isFavoriteExist(item) ? deleteFavorite(item) : addFavorite(item);
                         }}>
                             <Icon name={isFavoriteExist(item) ? 'favorite' : 'favorite-border'}
                                   color='#11CB46' size={28}/>
@@ -125,9 +126,7 @@ function HomeScreen(props) {
                                 <View style={tailwind('flex-row')}>
                                     <View style={tailwind('flex-1 mb-1 pr-5 items-end self-center')}>
                                         <TouchableOpacity onPress={() => {
-                                            isFavoriteExist(heroMovie)
-                                                ? deleteFavorite(heroMovie)
-                                                : addFavorite(heroMovie);
+                                            isFavoriteExist(heroMovie) ? deleteFavorite(heroMovie) : addFavorite(heroMovie);
                                         }
                                         }>
                                             <Icon

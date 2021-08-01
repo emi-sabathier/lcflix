@@ -27,9 +27,9 @@ const theme = {
 const App = () => {
     return (
         <Provider store={store}>
-            <PaperProvider theme={theme}>
-                <BottomBarStack/>
-            </PaperProvider>
+                <PaperProvider theme={theme}>
+                    <BottomBarStack/>
+                </PaperProvider>
         </Provider>
     );
 };
