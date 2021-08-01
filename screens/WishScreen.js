@@ -31,7 +31,7 @@ function WishScreen(props) {
         return (
             <View key={item.id} style={tailwind('mt-4 flex-row bg-white max-h-40')}>
                 <View style={tailwind('flex-1')}>
-                    <Image style={[{height: 150}, tailwind('w-full h-full')]}
+                    <Image style={[{height: '100%', resizeMode:'cover'}, tailwind('w-full')]}
                            source={{uri: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`}}/>
                     <View style={tailwind('absolute bottom-0 mb-1 pb-0 pr-2 items-end self-end')}>
                         <TouchableOpacity onPress={() => {
