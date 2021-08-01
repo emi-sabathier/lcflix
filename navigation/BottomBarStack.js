@@ -14,9 +14,10 @@ import {AlertContextProvider} from '../context/AlertContext';
 const Tab = createBottomTabNavigator();
 
 function BottomBarStack(props) {
-    const {favoritesList} = useSelector(state => state.favoritesReducer);
+    const {favoritesList} = useSelector(state => state.favoritesReducer); // extract favoritesList from redux store
     const {darkGrey} = props.theme.background;
     return (
+        // inject dropDownAlert through AlertContextProvider
         <AlertContextProvider>
             <NavigationContainer>
                 <Tab.Navigator initialRouteName="Home"

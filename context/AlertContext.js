@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import DropdownAlert from 'react-native-dropdownalert';
 const AlertContext = React.createContext();
 
+// Creating dropdownalert context
 function AlertContextProvider(props) {
     const [dropDownAlert, setDropDownAlert] = useState(null);
 

@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 function WishScreen(props) {
     const dispatch = useDispatch();
     const {favoritesList} = useSelector(state => state.favoritesReducer);
-    const {primary, title, flashyGreen} = props.theme.colors;
+    const {primary} = props.theme.colors;
     const [isFavoritesList, setIsFavoritesList] = useState(false);
     const navigation = useNavigation();
 
@@ -19,6 +19,7 @@ function WishScreen(props) {
         favoritesList.length > 0 ? setIsFavoritesList(true) : setIsFavoritesList(false);
     }, [isFavoritesList, favoritesList]);
 
+    // update redux store, delete movie
     const dispatchDeleteFavorite = (movie) => {
         dispatch(deleteFavoriteMovie(movie));
     };

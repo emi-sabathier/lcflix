@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import {store} from './redux/index';
 import BottomBarStack from './navigation/BottomBarStack';
 
+// configuration react native paper theme, inject through PaperProvider into the whole App
 const theme = {
     background: {
         darkGrey: '#222',

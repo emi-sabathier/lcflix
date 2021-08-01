@@ -39,10 +39,12 @@ function MovieDetailsScreen(props) {
         fetchData();
     }, [setDirector]);
 
+    // update redux store, add movie
     const dispatchAddFavorite = (movie) => {
         dispatch(addFavoriteMovie(movie));
     };
 
+    // update redux store, delete movie
     const dispatchDeleteFavorite = (movie) => {
         dispatch(deleteFavoriteMovie(movie));
     };

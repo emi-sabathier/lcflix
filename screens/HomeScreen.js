@@ -27,10 +27,12 @@ function HomeScreen(props) {
     useEffect(() => {
     }, []);
 
+    // update redux store, add movie
     const dispatchAddFavorite = (movie) => {
         dispatch(addFavoriteMovie(movie));
     };
 
+    // update redux store, delete movie
     const dispatchDeleteFavorite = (movie) => {
         dispatch(deleteFavoriteMovie(movie));
     };
@@ -60,7 +62,6 @@ function HomeScreen(props) {
             .catch(err => {
                 dropDownAlert.alertWithType('error', 'Erreur', 'Une erreur est survenue lors de la récupération des films');
             });
-
         await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=318dc2bc4628a09c26291d2dbd0ca6b2&language=fr&page=1')
             .then(res => {
                 setIsLoading(false);
@@ -78,7 +79,7 @@ function HomeScreen(props) {
 
     const onPressHero = (item) => {
         navigation.navigate('MovieDetails', {item});
-    }
+    };
 
     const renderItem = ({item}) => {
         return (
@@ -120,10 +121,10 @@ function HomeScreen(props) {
                     <>
                         <View style={{height: 3, backgroundColor: flashyGreen}}/>
                         <View style={tailwind('flex-1')}>
-                            <TouchableOpacity onPress={() =>  onPressHero(heroMovie)}>
+                            <TouchableOpacity onPress={() => onPressHero(heroMovie)}>
                                 <Image
                                     source={{uri: `https://image.tmdb.org/t/p/w500${heroMovie.backdrop_path}`}}
-                                    style={[tailwind('h-full w-full justify-end')]} />
+                                    style={[tailwind('h-full w-full justify-end')]}/>
                                 <Text style={[{
                                     color: primary,
                                     fontFamily: fonts.bold,
@@ -131,7 +132,8 @@ function HomeScreen(props) {
                                 }, tailwind('w-full absolute bottom-0 flex-1 text-2xl leading-10 text-center')]}>{heroMovie.original_title}
                                 </Text>
                                 <View style={tailwind('flex-row')}>
-                                    <View style={tailwind('flex-1 mb-1 bottom-0 right-0 absolute pr-5 items-end self-center')}>
+                                    <View
+                                        style={tailwind('flex-1 mb-1 bottom-0 right-0 absolute pr-5 items-end self-center')}>
                                         <TouchableOpacity onPress={() => {
                                             isFavoriteExist(heroMovie) ? deleteFavorite(heroMovie) : addFavorite(heroMovie);
                                         }}>

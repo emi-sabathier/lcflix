@@ -17,12 +17,9 @@ export default function WishListButton(props) {
     };
 
     const isFavoriteExist = (movie) => {
-        console.log('is fav exist movie', movie)
         if (favoritesList.filter((item,i) => item.id === movie.id).length > 0) {
-            console.log('true')
             return true;
         } else {
-            console.log('false');
             return false;
         }
     };
