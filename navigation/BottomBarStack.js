@@ -8,10 +8,12 @@ import WishStack from './WishStack';
 import tailwind from 'tailwind-rn';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {fonts} from '../assets/fonts-style';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 function BottomBarStack(props) {
+    const {favoritesList} = useSelector(state => state.favoritesReducer);
     const {darkGrey} = props.theme.background
     return (
         <NavigationContainer>
@@ -47,7 +49,7 @@ function BottomBarStack(props) {
                                 <Icon name="favorite" color="#11CB46" size={28}/>
                             </View>
                         ),
-                        tabBarBadge: '4',
+                        tabBarBadge: Object.keys(favoritesList).length,
                         tabBarLabel: 'WishList',
                     }}
                 />

@@ -15,7 +15,6 @@ function MovieDetailsScreen(props) {
     useEffect(() => {
         const fetchData = async () => {
             const res = await axios.get(`https://api.themoviedb.org/3/movie/${item.id}?api_key=318dc2bc4628a09c26291d2dbd0ca6b2&append_to_response=credits`);
-            console.log(res);
             if (res.data) {
                 const directorData = res.data.credits.crew.filter(item => item.job === 'Director');
                 setDirector(directorData[0]);
