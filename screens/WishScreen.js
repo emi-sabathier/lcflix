@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, ScrollView, Image, View, TouchableOpacity} from 'react-native';
+import {FlatList, Text, Image, View, TouchableOpacity} from 'react-native';
 import {withTheme} from 'react-native-paper';
 import tailwind from 'tailwind-rn';
 import {fonts} from '../assets/fonts-style';
