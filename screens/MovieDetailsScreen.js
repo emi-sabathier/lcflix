@@ -8,7 +8,6 @@ import {
 import React, {useEffect, useState} from 'react';
 import tailwind from 'tailwind-rn';
 import {withTheme} from 'react-native-paper';
-import {fonts} from '../assets/fonts-style';
 import axios from 'axios';
 import WishListButton from '../shared/WishListButton';
 
@@ -43,7 +42,7 @@ function MovieDetailsScreen(props) {
                             <View style={[{backgroundColor: '#000000c0'},tailwind('w-full absolute bottom-0 flex-1 flex-row')]}>
                                 <Text style={[{
                                     color: primary,
-                                    fontFamily: fonts.bold,
+                                    fontWeight: 'bold',
                                 }, tailwind('w-10/12 text-2xl leading-10 ml-5 text-center')]}>{item.title}
                                 </Text>
                                 <View style={tailwind('mb-1 pr-5 items-end self-center')}>
@@ -56,16 +55,16 @@ function MovieDetailsScreen(props) {
                                 color: primary,
                                 width: 150,
                                 borderColor: flashyGreen,
-                                fontFamily: fonts.bold,
+                                fontWeight: 'bold',
                             }, tailwind('text-lg pt-2 border-b-2')]}>Réalisateur</Text>
-                            <Text style={[{color: primary,fontFamily: fonts.light}, tailwind('pt-2')]}>{director.name}</Text>
+                            <Text style={[{color: primary}, tailwind('pt-2')]}>{director.name}</Text>
                             <Text style={[{
                                 color: primary,
                                 width: 150,
                                 borderColor: flashyGreen,
-                                fontFamily: fonts.bold,
+                                fontWeight: 'bold',
                             }, tailwind('text-lg pt-2 border-b-2')]}>Synopsis</Text>
-                            <Text style={[{color: primary,fontFamily: fonts.light}, tailwind('pt-2')]}>{item.overview}</Text>
+                            <Text style={[{color: primary}, tailwind('pt-2')]}>{item.overview}</Text>
                         </View>
                     </ScrollView></> :
                 <View style={tailwind('flex-1 justify-center')}>
