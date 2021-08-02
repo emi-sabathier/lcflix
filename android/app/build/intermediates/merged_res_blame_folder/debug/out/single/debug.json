@@ -60,12 +60,12 @@
         "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\raw_app.json.flat",
-        "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\raw\\app.json"
-    },
-    {
         "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_node_modules_reactnavigation_stack_src_views_assets_backicon.png.flat",
         "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\drawable-xxhdpi\\node_modules_reactnavigation_stack_src_views_assets_backicon.png"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\raw_app.json.flat",
+        "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\raw\\app.json"
     },
     {
         "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_node_modules_reactnativedropdownalert_assets_info.png.flat",
@@ -88,16 +88,16 @@
         "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\drawable-mdpi\\node_modules_reactnativedropdownalert_assets_info.png"
     },
     {
-        "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_node_modules_reactnativedropdownalert_assets_success.png.flat",
         "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\drawable-xhdpi\\node_modules_reactnativedropdownalert_assets_success.png"
     },
     {
         "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_node_modules_reactnativedropdownalert_assets_warn.png.flat",
         "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\drawable-xxhdpi\\node_modules_reactnativedropdownalert_assets_warn.png"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\LENOVO\\Documents\\DEVELOPPEMENT\\tests-tech\\lcflix\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_node_modules_reactnativepaper_src_assets_backchevron.png.flat",
