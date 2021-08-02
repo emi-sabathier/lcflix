@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, Text, Image, View, TouchableOpacity} from 'react-native';
 import {withTheme} from 'react-native-paper';
 import tailwind from 'tailwind-rn';
-import {fonts} from '../assets/fonts-style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteFavoriteMovie} from '../redux/actions';
@@ -48,12 +47,12 @@ function WishScreen(props) {
                         </View>
                     </View>
                     <View style={tailwind('flex-1 p-2')}>
-                        <Text style={{fontFamily: fonts.bold}}>{item.original_title}</Text>
-                        <Text style={[{fontFamily: fonts.light}, tailwind('text-xs')]}>Date de
+                        <Text style={{fontWeight: 'bold'}}>{item.original_title}</Text>
+                        <Text style={tailwind('text-xs')}>Date de
                             sortie: {item.release_date.substring(0,4)}</Text>
                         <View style={tailwind('flex-row')}>
                             <Icon name="thumb-up" color="#11CB46" size={20}/>
-                            <Text style={[{fontFamily: fonts.bold}, tailwind('pl-2')]}>{item.vote_average}</Text>
+                            <Text style={[{fontWeight: 'bold'}, tailwind('pl-2')]}>{item.vote_average}</Text>
                         </View>
                         <View>
                             <Text style={tailwind('text-xs pt-2')}>
@@ -78,12 +77,11 @@ function WishScreen(props) {
                     </View>
                 </> :
                 <View style={tailwind('flex-1 justify-center items-center ')}>
-                    <Text style={[{color: primary, fontFamily: fonts.bold}, tailwind('text-2xl p-5 text-center')]}>Vous
+                    <Text style={[{color: primary, fontWeight: 'bold'}, tailwind('text-2xl p-5 text-center')]}>Vous
                         n'avez aucun favori</Text>
                     <View style={tailwind('flex-row')}>
                         <Text style={[{
                             color: primary,
-                            fontFamily: fonts.light,
                         }, tailwind('text-sm self-center text-center')]}>Ajoutez
                             en cliquant sur </Text>
                         <Icon name="favorite-border" color='#11CB46' size={28}/>
