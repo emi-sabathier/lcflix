@@ -1,7 +1,6 @@
 import React from 'react';
 import {createStackNavigator,HeaderBackButton} from '@react-navigation/stack';
 import WishScreen from '../screens/WishScreen';
-import {fonts} from '../assets/fonts-style';
 import {withTheme} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 const Stack = createStackNavigator();
@@ -18,7 +17,7 @@ function WishStack(props) {
             },
             headerTintColor: primary,
             headerTitleStyle: {
-                fontFamily: fonts.bold
+                fontWeight: 'bold',
             },
             headerLeft: () => (
                 <HeaderBackButton tintColor={primary} onPress={() => navigation.goBack()} />
