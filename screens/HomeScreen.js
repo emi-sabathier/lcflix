@@ -5,7 +5,6 @@ import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 import {withTheme} from 'react-native-paper';
-import {fonts} from '../assets/fonts-style';
 import tailwind from 'tailwind-rn';
 import {AlertContext} from '../context/AlertContext';
 import WishListButton from '../shared/WishListButton';
@@ -68,7 +67,7 @@ function HomeScreen(props) {
                     <Text style={[{
                         lineHeight: 1,
                         color: title,
-                        fontFamily: fonts.bold,
+                        fontWeight:'bold'
                     }, tailwind('flex-1 text-sm text-left self-start')]}>{item.original_title}
                     </Text>
                     <View style={tailwind('pr-3 items-end self-center')}>
@@ -92,7 +91,7 @@ function HomeScreen(props) {
                                     style={[tailwind('h-full w-full justify-end')]}/>
                                 <Text style={[{
                                     color: primary,
-                                    fontFamily: fonts.bold,
+                                    fontWeight: 'bold',
                                     backgroundColor: '#000000c0',
                                 }, tailwind('w-full absolute bottom-0 flex-1 text-2xl leading-10 text-center')]}>{heroMovie.original_title}
                                 </Text>
@@ -108,9 +107,9 @@ function HomeScreen(props) {
                         <View style={tailwind('flex-1')}>
                             <Text style={[{
                                 color: primary,
-                                fontFamily: fonts.bold,
+                                fontWeight: 'bold',
                             }, tailwind('px-5 pt-2 text-left text-xl')]}>Le top 5</Text>
-                            <Text style={[{fontFamily: fonts.light, color: primary}, tailwind('px-5 pb-3 opacity-60')]}>Les
+                            <Text style={[{color: primary}, tailwind('px-5 pb-3 opacity-60')]}>Les
                                 films les plus populaires</Text>
                             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                                 <Carousel

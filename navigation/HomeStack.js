@@ -2,7 +2,6 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import MovieDetailsScreen from '../screens/MovieDetailsScreen';
-import {fonts} from '../assets/fonts-style';
 import {withTheme} from 'react-native-paper';
 
 const Stack = createStackNavigator();
@@ -17,7 +16,7 @@ function HomeStack(props) {
                 },
                 headerTintColor: primary,
                 headerTitleStyle: {
-                    fontFamily: fonts.bold
+                    fontWeight: 'bold',
                 },
                 cardStyle: {backgroundColor: '#000'},
             }}>

@@ -7,7 +7,6 @@ import HomeStack from './HomeStack';
 import WishStack from './WishStack';
 import tailwind from 'tailwind-rn';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {fonts} from '../assets/fonts-style';
 import {useSelector} from 'react-redux';
 import {AlertContextProvider} from '../context/AlertContext';
 
@@ -47,7 +46,7 @@ function BottomBarStack(props) {
                             tabBarLabel: () => null,
                             tabBarIcon: () => (
                                 <View style={[{width:225},tailwind('left-0 absolute right-0 justify-center items-end')]}>
-                                    <Text style={{color: '#fff', fontSize: 30, fontFamily: fonts.bold}}>LcFlix!</Text>
+                                    <Text style={{color: '#fff', fontSize: 30, fontWeight: 'bold'}}>LcFlix!</Text>
                                 </View>
                             ),
                         }}
