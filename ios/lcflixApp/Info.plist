@@ -53,10 +53,6 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>merriweather-bold.ttf</string>
-		<string>merriweather-italic.ttf</string>
-		<string>merriweather-light.ttf</string>
-		<string>merriweather-regular.ttf</string>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
@@ -73,10 +69,6 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>gilroy-bold.otf</string>
-		<string>gilroy-light.otf</string>
-		<string>RALEWAY-BOLD.TTF</string>
-		<string>RALEWAY-REGULAR.TTF</string>
 	</array>
 </dict>
 </plist>
