@@ -1,4 +1,4 @@
-# Application lcflix
+# Application lcflix Android
 
 Création d'un dashboard de films:
 - Menu en bas (doit être fixed)
@@ -25,13 +25,11 @@ https://developers.themoviedb.org/3/getting-started/introduction
 
 ### Tester l'applications
 
-Sur android : Copier l'apk sur votre téléphone et l'exécuter 
+Copier l'apk sur votre téléphone et l'exécuter 
 
 Lien :
 lcflix/android/app/build/outputs/apk/debug/app-debug.apk
 
-Sur ios : installer android studio
-Ouvrir le project
 
 
 
